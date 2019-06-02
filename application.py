@@ -26,6 +26,8 @@ STRUCT_PATH = 'models/model.json'
 # model = load_model(MODEL_PATH)
          # Necessary
 
+hists = os.listdir('static/plots')
+hists = ['plots/' + file for file in hists if not file.startswith(".")]
 
 # load json and create model
 with open(STRUCT_PATH, 'r') as json_file:
@@ -74,30 +76,41 @@ def decode_predictions(preds, top=1):
 @app.route('/', methods=['GET'])
 def index():
     # Main page
-    return render_template('index.html')
+    print(hists)
+    return render_template('index.html', hists = enumerate(hists))
 
 
 @app.route('/predict', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
-        # Get the file from post request
-        f = request.files['file']
+        # Try File from post request
+        try:
+            f = request.files['file']
 
-        # Save the file to ./uploads
-        basepath = os.path.dirname(__file__)
-        file_path = os.path.join(
-            basepath, 'uploads', secure_filename(f.filename))
-        f.save(file_path)
+            # Save the file to ./uploads
+            basepath = os.path.dirname(__file__)
+            file_path = os.path.join(
+                basepath, 'uploads', secure_filename(f.filename))
+            f.save(file_path)
 
-        # Make prediction
-        preds = model_predict(file_path, model)
+            # Make prediction
+            preds = model_predict(file_path, model)
 
-        # Process your result for human
-        pred_class = preds.argmax(axis=-1)            # Simple argmax
-        pred_class = decode_predictions(pred_class)
-        result = str(pred_class)               # Convert to string
-        os.remove(file_path)
-        return result
+            # Process your result for human
+            pred_class = preds.argmax(axis=-1)            # Simple argmax
+            pred_class = decode_predictions(pred_class)
+            result = str(pred_class)               # Convert to string
+            os.remove(file_path)
+            return result
+        except: # If the first fails, must be a selected photo
+            selected = int(request.form.get('selectedPhoto'))
+            preds = model_predict("static/" + hists[selected], model)
+            # Process your result for human
+            pred_class = preds.argmax(axis=-1)            # Simple argmax
+            pred_class = decode_predictions(pred_class)
+            result = str(pred_class)               # Convert to string
+            return result
+            
     return None
 
 

@@ -4,14 +4,44 @@
     Supermarket Shelf Clssification + Localization
 </h2>
 
-<div>
-    <form id="upload-file" method="post" enctype="multipart/form-data">
+<div class="row">
+<form id="upload-file" method="post" enctype="multipart/form-data">
+
+  <div class="column" style="">
+ 
+    <h3>
+    Choose your own image...    
+    </h3>    
         <label for="imageUpload" class="upload-label">
             Choose...
         </label>
         <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
-    </form>
+        
+  
 
+
+  </div>
+  <div class="column" style="">
+    <h3>
+    Or use one of ours  
+    </h3>
+    <div style = "width:100%">
+    <select class="image-picker show-html" id = "selectedPhoto" name= "selectedPhoto">
+            <option value=""></option>
+            {% for hist in hists %}
+             <option data-img-src="{{url_for('static', filename=hist[1])}}" data-img-alt="Image {{hist[0]}}" value="{{hist[0]}}">Image {{hist[0] + 1 }} </option>
+            {% endfor %}
+            
+        </select>
+    </div>
+    
+  </div>
+      </form>
+    
+</div>
+<div class="row">
+    <div class="column">
+    
     <div class="image-section" style="display:none;">
         <div class="img-preview">
             <div id="imagePreview">
@@ -27,7 +57,7 @@
     <h3 id="result">
         <span> </span>
     </h3>
-
-</div>
-
+    </div>
+    
+    </div>
 {% endblock %}
