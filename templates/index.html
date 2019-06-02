@@ -1,0 +1,63 @@
+{% extends "base.html" %} {% block content %}
+
+<h2>
+    Supermarket Shelf Clssification + Localization
+</h2>
+
+<div class="row">
+<form id="upload-file" method="post" enctype="multipart/form-data">
+
+  <div class="column" style="">
+ 
+    <h3>
+    Choose your own image...    
+    </h3>    
+        <label for="imageUpload" class="upload-label">
+            Choose...
+        </label>
+        <input type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
+        
+  
+
+
+  </div>
+  <div class="column" style="">
+    <h3>
+    Or use one of ours  
+    </h3>
+    <div style = "width:100%">
+    <select class="image-picker show-html" id = "selectedPhoto" name= "selectedPhoto">
+            <option value=""></option>
+            {% for hist in hists %}
+             <option data-img-src="{{url_for('static', filename=hist[1])}}" data-img-alt="Image {{hist[0]}}" value="{{hist[0]}}">Image {{hist[0] + 1 }} </option>
+            {% endfor %}
+            
+        </select>
+    </div>
+    
+  </div>
+      </form>
+    
+</div>
+<div class="row">
+    <div class="column">
+    
+    <div class="image-section" style="display:none;">
+        <div class="img-preview">
+            <div id="imagePreview">
+            </div>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Predict!</button>
+        </div>
+    </div>
+
+    <div class="loader" style="display:none;"></div>
+
+    <h3 id="result">
+        <span> </span>
+    </h3>
+    </div>
+    
+    </div>
+{% endblock %}
