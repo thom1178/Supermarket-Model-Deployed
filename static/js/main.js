@@ -62,8 +62,13 @@ $(document).ready(function () {
                 // Get and display the result
                 $('.loader').hide();
                 $('#result').fadeIn(600);
-                $('#result').text(' Result:  ' + data);
-                console.log('Success!');
+                $('#result').text(' Result:  ' + data.split(" ")[0]);
+                //Show image
+                $('#imagePreview2').css('background-image', 'url(/get_image?p=' + data.split(" ")[1]+ ')');
+                $('#imagePreview2').hide();
+                $('.image-section2').show();
+                $('#imagePreview2').fadeIn(650);
+                
             },
             error: function (request, status, error) {
                 alert("Oops: Something went terribly wrong...");

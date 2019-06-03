@@ -40,9 +40,12 @@
         }
         .image_picker_image {
             max-width: 140px;
-            max-height: 100px;
+            max-height: 150px;
             background-color: #FF0000;
         }
+        div#git {
+    margin-top: 50px;
+}
     </style>
 </head>
 
@@ -56,6 +59,11 @@
     <div class="container">
         <div id="content" style="margin-top:2em">{% block content %}{% endblock %}</div>
     </div>
+    <div class="row" id = "git">
+    <div class="container">
+        <p>You can find the code for this project <a href = "https://github.com/thom1178/Supermarket-Model-Deployed">on github</a></p>
+    </div>
+</div>
 </body>
 
 <footer>
