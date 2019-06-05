@@ -1,4 +1,4 @@
-###### Keras Methods #####
+# Keras Methods #####
 from keras.models import Sequential
 from keras.layers.convolutional import Convolution2D
 from keras.layers import Dense,GlobalAveragePooling2D
@@ -64,7 +64,7 @@ def process_pred_img(img, w = 224, h = 224):
     """
     img = cv2.resize(img,(h,w))
     img = img.reshape(1,w,h,3)
-    return(img)
+    return img
 
 def localizee(model,unscaled, W = 300, H = 300, THRESHOLD = .8, EPSILON = 0.02):
     """

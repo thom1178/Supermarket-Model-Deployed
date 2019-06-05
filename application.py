@@ -1,18 +1,18 @@
-#from __future__ import division, print_function
+from __future__ import division, print_function
 # coding=utf-8
 import sys
 import os
-#import glob
-import re
+# import glob
+# import re
 import numpy as np
 
 sys.path.append('/usr/local/lib64/python3.6/site-packages')
 import cv2
 import localize
 # Keras
-from keras.applications.vgg16 import preprocess_input
+# from keras.applications.vgg16 import preprocess_input
 from keras.models import load_model,model_from_json
-from keras.preprocessing import image
+# from keras.preprocessing import image
 
 # Flask utils
 from flask import Flask, redirect, url_for, request, render_template, send_file
