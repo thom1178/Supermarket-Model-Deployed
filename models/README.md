@@ -1,1 +1,1 @@
-Put your own models under this directory.
+If you want access to the `.h5` model files, please email me directly.   
